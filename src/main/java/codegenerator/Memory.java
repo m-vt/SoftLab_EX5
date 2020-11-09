@@ -23,9 +23,17 @@ public class Memory {
         lastTempIndex += tempSize;
         return lastTempIndex - tempSize;
     }
-    public  int getDateAddress(){
+    public  int sgetDateAddress(){
         lastDataAddress += dataSize;
         return lastDataAddress-dataSize;
+    }
+
+    public void AddSizeDataAddres(){
+        lastDataAddress += dataSize;
+    }
+
+    public int getLastDataAddress(){
+        return lastDataAddress - dataSize;
     }
     public int saveMemory() {
         codeBlock.add(new _3AddressCode());
