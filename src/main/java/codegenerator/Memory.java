@@ -19,14 +19,15 @@ public class Memory {
         lastDataAddress = 200;
     }
 
-    public int getTemp() {
+
+    public void addLastTempIndex(){
         lastTempIndex += tempSize;
+    }
+
+    public int getLastTempIndex(){
         return lastTempIndex - tempSize;
     }
-    public  int sgetDateAddress(){
-        lastDataAddress += dataSize;
-        return lastDataAddress-dataSize;
-    }
+
 
     public void AddSizeDataAddres(){
         lastDataAddress += dataSize;
