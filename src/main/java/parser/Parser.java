@@ -43,9 +43,8 @@ public class Parser {
     lexicalAnalyzer lexicalAnalyzer;
     lexicalAnalyzer = new lexicalAnalyzer(sc);
     Token lookAhead = lexicalAnalyzer.getNextToken();
-    boolean finish = false;
     Action currentAction;
-    while (!finish) {
+   loop: while (true) {
       try {
         currentAction = parseTable.getActionTable(parsStack.peek(), lookAhead);
 
@@ -67,8 +66,7 @@ public class Parser {
             } catch (Exception ignored1) {}
             break;
           case accept:
-            finish = true;
-            break;
+            break loop;
         }
 
       } catch (Exception ignored) {
