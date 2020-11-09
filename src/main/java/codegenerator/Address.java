@@ -4,9 +4,9 @@ package codegenerator;
  * Created by mohammad hosein on 6/28/2015.
  */
 public class Address {
-    public int num;
-    public TypeAddress Type;
-    public varType varType;
+    private int num;
+    private TypeAddress Type;
+    private varType varType;
 
     public Address(int num,varType varType, TypeAddress Type) {
         this.num = num;
@@ -29,5 +29,17 @@ public class Address {
                 return "#"+num;
         }
         return num+"";
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public codegenerator.varType getVarType() {
+        return varType;
+    }
+
+    public TypeAddress getType() {
+        return Type;
     }
 }
