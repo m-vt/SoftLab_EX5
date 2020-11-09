@@ -1,4 +1,4 @@
-package codeGenerator;
+package codegenerator;
 
 import errorHandler.ErrorHandler;
 import scanner.token.Token;
