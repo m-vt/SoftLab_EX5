@@ -1,7 +1,6 @@
 package parser;
 
 import scanner.token.Token;
-import scanner.type.Type;
 
 import java.util.*;
 
@@ -9,9 +8,10 @@ import java.util.*;
  * Created by mohammad hosein on 6/25/2015.
  */
 public class ParseTable {
-    private ArrayList<Map<Token,Action>> actionTable;
-    private ArrayList<Map<NonTerminal,Integer>> gotoTable;
-    public ParseTable(String jsonTable) throws Exception {
+
+    private static ArrayList<Map<Token,Action>> actionTable;
+    private static ArrayList<Map<NonTerminal,Integer>> gotoTable;
+    static ParseTable create(String jsonTable) throws Exception  {
         jsonTable = jsonTable.substring(2,jsonTable.length()-2);
         String[] Rows = jsonTable.split("\\],\\[");
         Map<Integer, Token> terminals = new HashMap<Integer, Token>();
@@ -54,7 +54,7 @@ public class ParseTable {
 //                        try {
                         Token t = terminals.get(j);
                         Action a = new Action(cols[j].charAt(0) == 'r' ? act.reduce : act.shift, Integer.parseInt(cols[j].substring(1)));
-                            actionTable.get(actionTable.size() - 1).put(t, a);
+                        actionTable.get(actionTable.size() - 1).put(t, a);
 //                        }catch (StringIndexOutOfBoundsException e){
 //                            e.printStackTrace();
 //                        }
@@ -68,7 +68,11 @@ public class ParseTable {
                 }
             }
         }
+        return new ParseTable();
     }
+//    public ParseTable(String jsonTable) throws Exception {
+//
+//    }
 
     public int getGotoTable(int currentState, NonTerminal variable )
     {
