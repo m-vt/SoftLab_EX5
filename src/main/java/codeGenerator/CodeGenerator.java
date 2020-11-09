@@ -278,6 +278,8 @@ public class CodeGenerator {
 
     }
 
+
+
     public void assign() {
 
             Address s1 = ss.pop();
@@ -293,6 +295,7 @@ public class CodeGenerator {
             memory.add3AddressCode(Operation.ASSIGN, s1, s2, null);
 
     }
+
 
     public void add() {
         Address temp = new Address(memory.getTemp(), varType.Int);
