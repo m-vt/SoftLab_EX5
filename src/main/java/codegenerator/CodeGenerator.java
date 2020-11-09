@@ -188,15 +188,12 @@ public class CodeGenerator {
         ss.pop();
 
         Symbol s = symbolTable.get(symbolStack.pop(), symbolStack.pop());
-        varType t = varType.Int;
-        switch (s.type) {
-            case Bool:
-                t = varType.Bool;
-                break;
-            case Int:
-                t = varType.Int;
-                break;
-        }
+        varType t ;
+        if (s.type == SymbolType.Int)
+             t = varType.Int;
+        else
+             t = varType.Bool;
+
         ss.push(new Address(s.address, t));
 
     }
