@@ -484,8 +484,8 @@ public class CodeGenerator {
         symbolTable.setLastType(SymbolType.Int);
     }
 
-    public void main() {
-    }
+//    public void main() {
+//    }
 }
 
 abstract class compare {
