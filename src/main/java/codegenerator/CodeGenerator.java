@@ -85,10 +85,12 @@ public class CodeGenerator {
                 print();
                 break;
             case 19:
-                equal();
+                compare operator = new Equal();
+                do_compare(operator);
                 break;
             case 20:
-                less_than();
+                compare operator2 = new LessThan();
+                do_compare(operator2);
                 break;
             case 21:
                 and();
@@ -363,28 +365,9 @@ public class CodeGenerator {
         memory.add3AddressCode(Operation.PRINT, ss.pop(), null, null);
     }
 
-    public void equal() {
-        memory.addLastTempIndex();
-        Address temp = new Address(memory.getLastTempIndex(), varType.Bool);
-        Address s2 = ss.pop();
-        Address s1 = ss.pop();
-        if (s1.getVarType() != s2.getVarType()) {
-            ErrorHandler.printError("The type of operands in equal operator is different");
-        }
-        memory.add3AddressCode(Operation.EQ, s1, s2, temp);
-        ss.push(temp);
-    }
 
-    public void less_than() {
-        memory.addLastTempIndex();
-        Address temp = new Address(memory.getLastTempIndex(), varType.Bool);
-        Address s2 = ss.pop();
-        Address s1 = ss.pop();
-        if (chechType(s1 , s2)) {
-            ErrorHandler.printError("The type of operands in less than operator is different");
-        }
-        memory.add3AddressCode(Operation.LT, s1, s2, temp);
-        ss.push(temp);
+    public void do_compare(compare operator) {
+        operator.compare(memory,ss);
     }
 
     public void and() {
@@ -499,4 +482,39 @@ public class CodeGenerator {
 
     public void main() {
     }
+}
+
+abstract class compare {
+    abstract void compare( Memory memory , Stack<Address> ss);
+
+}
+class Equal extends compare{
+
+    @Override
+    void compare(Memory memory , Stack<Address> ss) {
+        memory.addLastTempIndex();
+        Address temp = new Address(memory.getLastTempIndex(), varType.Bool);
+        Address s2 = ss.pop();
+        Address s1 = ss.pop();
+        if (s1.getVarType() != s2.getVarType()) {
+            ErrorHandler.printError("The type of operands in equal operator is different");
+        }
+        memory.add3AddressCode(Operation.EQ, s1, s2, temp);
+        ss.push(temp);
+    }
+}
+class LessThan extends compare{
+    @Override
+    void compare( Memory memory, Stack<Address> ss) {
+        memory.addLastTempIndex();
+        Address temp = new Address(memory.getLastTempIndex(), varType.Bool);
+        Address s2 = ss.pop();
+        Address s1 = ss.pop();
+        if (s1.getVarType() != varType.Int || s2.getVarType() != varType.Int) {
+            ErrorHandler.printError("The type of operands in less than operator is different");
+        }
+        memory.add3AddressCode(Operation.LT, s1, s2, temp);
+        ss.push(temp);
+    }
+
 }
