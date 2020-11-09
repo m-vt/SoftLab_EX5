@@ -131,6 +131,7 @@ public class CodeGenerator {
             case 33:
                 defMain();
                 break;
+
         }
     }
 
@@ -167,6 +168,8 @@ public class CodeGenerator {
                         break;
                     case Int:
                         t = varType.Int;
+                        break;
+                    default:
                         break;
                 }
                 ss.push(new Address(s.address, t));
@@ -237,6 +240,8 @@ public class CodeGenerator {
             case Bool:
                 t = varType.Bool;
                 break;
+            default:
+                break;
         }
         memory.addLastTempIndex();
         Address temp = new Address(memory.getLastTempIndex(),t);
@@ -261,6 +266,8 @@ public class CodeGenerator {
                     break;
                 case Int:
                     t = varType.Int;
+                    break;
+                default:
                     break;
             }
             Address param = ss.pop();
