@@ -18,7 +18,7 @@ public class Parser {
   private ArrayList<Rule> rules;
   private Stack<Integer> parsStack;
   private ParseTable parseTable;
-  private lexicalAnalyzer lexicalAnalyzer;
+//  private lexicalAnalyzer lexicalAnalyzer;
   private CodeGenerator cg;
 
   public Parser() {
@@ -41,6 +41,7 @@ public class Parser {
   }
 
   public void startParse(java.util.Scanner sc) {
+    lexicalAnalyzer lexicalAnalyzer;
     lexicalAnalyzer = new lexicalAnalyzer(sc);
     Token lookAhead = lexicalAnalyzer.getNextToken();
     boolean finish = false;
